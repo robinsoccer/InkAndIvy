@@ -126,6 +126,8 @@ namespace InkAndIvy.Scenes
         }
         public void Draw(SpriteBatch spriteBatch)
         {
+            spriteBatch.Begin(samplerState: SamplerState.PointClamp);
+
             spriteBatch.Draw(titleImage, new Rectangle((int)titlePos.X, (int)titlePos.Y, titleImage.Width * scale, titleImage.Height * scale), Color.White);
 
             if (inSpot)

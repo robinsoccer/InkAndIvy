@@ -111,14 +111,15 @@ namespace InkAndIvy.Scenes
 
             if (playerPos.Y + 17 * 5 > tilemapPos.Y + (13 * 16 * 5))
             {
-                sceneManager.AddScene(new ForestScene(Content, sceneManager, graphics, "house"));
+                sceneManager.AddScene(new ForestScene(Content, sceneManager, graphics, "house", game));
             }
 
             oldState = kState;
         }
         public void Draw(SpriteBatch spriteBatch)
         {
-            
+            spriteBatch.Begin(samplerState: SamplerState.PointClamp);
+
             BG.Draw(spriteBatch, tileset, tilemapPos);
             MG.Draw(spriteBatch, tileset, tilemapPos);
 

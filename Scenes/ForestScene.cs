@@ -36,9 +36,13 @@ namespace InkAndIvy.Scenes
         private int totalTextures;
         private int tilemapLength;
 
+        private Camera camera;
+
         private int scale;
 
-        public ForestScene(ContentManager Content, SceneManager sceneManager, GraphicsDeviceManager graphics, string starting)
+        private Game game;
+
+        public ForestScene(ContentManager Content, SceneManager sceneManager, GraphicsDeviceManager graphics, string starting, Game game)
         {
             this.Content = Content;
             this.sceneManager = sceneManager;
@@ -46,6 +50,8 @@ namespace InkAndIvy.Scenes
 
             tilemapLength = 40;
             scale = 5;
+
+            this.game = game;
 
             gridM = new GridManager(scale);
 
@@ -71,6 +77,8 @@ namespace InkAndIvy.Scenes
             
             tileset = Content.Load<Texture2D>("tilesets/ForestTilesetv5");
 
+            camera = new Camera(game.GraphicsDevice);
+
             totalTextures = tileset.Width / 16;
 
             BG = new Tilemap(tileset, "../../../Content/Data/Forest/ForestTilemapv5_BG.csv", totalTextures);
@@ -93,10 +101,13 @@ namespace InkAndIvy.Scenes
             Rectangle playerRect = player.Update(gameTime);
             Vector2 playerPos = new Vector2(playerRect.X, playerRect.Y);
 
+            camera.Position = player.position;
         }
 
         public void Draw(SpriteBatch spriteBatch)
         {
+            spriteBatch.Begin(samplerState: SamplerState.PointClamp, transformMatrix: camera.GetTransformation());
+
             BG.Draw(spriteBatch, tileset, tilemapPos);
             MG.Draw(spriteBatch, tileset, tilemapPos);
 

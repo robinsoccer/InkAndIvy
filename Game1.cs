@@ -62,7 +62,7 @@ namespace InkAndIvy
         {
             Color color = new Color(33, 33, 33);
             GraphicsDevice.Clear(color);
-            _spriteBatch.Begin(samplerState: SamplerState.PointClamp);
+            
 
             sceneManager.GetCurrentScene().Draw(_spriteBatch);
 

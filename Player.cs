@@ -76,7 +76,7 @@ namespace InkAndIvy
                     {
                         if (value > 0)
                         {
-                            Rectangle tileBox = new Rectangle((x * 16 * Scale) + (int)tilemapOffset.X, (y * 16 * Scale) + (int)tilemapOffset.Y, 16 * Scale, 16 * Scale);
+                            Rectangle tileBox = new Rectangle(x * 16 * Scale + (int)tilemapOffset.X, y * 16 * Scale + (int)tilemapOffset.Y, 16 * Scale, 16 * Scale);
                             tiles.Add(tileBox);
                         }
                     }
@@ -90,7 +90,7 @@ namespace InkAndIvy
 
         public Rectangle Update(GameTime gameTime)
         {
-            Rectangle playerBounds = new Rectangle((int)position.X + (1 * Scale), (int)position.Y + (20 * Scale), 14 * Scale, 12 * Scale);
+            Rectangle playerBounds = new Rectangle((int)position.X + 1 * Scale, (int)position.Y + 20 * Scale, 14 * Scale, 12 * Scale);
 
             if (am != null)
             {
