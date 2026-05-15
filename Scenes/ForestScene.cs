@@ -114,6 +114,8 @@ namespace InkAndIvy.Scenes
             player.Draw(spriteBatch);
 
             FG.Draw(spriteBatch, tileset, tilemapPos);
+
+            spriteBatch.End();
         }
     }
 }

@@ -129,7 +129,7 @@ namespace InkAndIvy.Scenes
 
             FG.Draw(spriteBatch, tileset, tilemapPos);
 
-
+            spriteBatch.End();
         }
     }
 }

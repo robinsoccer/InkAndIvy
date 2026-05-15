@@ -16,11 +16,14 @@ namespace InkAndIvy
         public PlayerData _playerData;
         public string _savePath;
 
+        private Texture2D cursorTexture;
+        private Vector2 cursorPosition;
+
         public Game1()
         {
             _graphics = new GraphicsDeviceManager(this);
             Content.RootDirectory = "Content";
-            IsMouseVisible = true;
+            IsMouseVisible = false;
         }
 
         protected override void Initialize()
@@ -45,6 +48,10 @@ namespace InkAndIvy
             _spriteBatch = new SpriteBatch(GraphicsDevice);
 
             sceneManager.AddScene(new TitleScene(Content, sceneManager, _graphics, 4, 2, this));
+
+            MouseState mouseState = new MouseState();
+            cursorPosition = new Vector2(mouseState.X, mouseState.Y);
+            cursorTexture = Content.Load<Texture2D>("mousesprite");
         }
 
         protected override void Update(GameTime gameTime)
@@ -53,7 +60,9 @@ namespace InkAndIvy
                 Exit();
 
             sceneManager.GetCurrentScene().Update(gameTime);
-            
+
+            MouseState mouseState = Mouse.GetState();
+            cursorPosition = new Vector2(mouseState.X, mouseState.Y);
 
             base.Update(gameTime);
         }
@@ -62,9 +71,13 @@ namespace InkAndIvy
         {
             Color color = new Color(33, 33, 33);
             GraphicsDevice.Clear(color);
-            
 
             sceneManager.GetCurrentScene().Draw(_spriteBatch);
+
+            _spriteBatch.Begin(SpriteSortMode.Deferred, BlendState.AlphaBlend, SamplerState.PointClamp);
+
+            Vector2 scale = new Vector2(2.5f, 2.5f);
+            _spriteBatch.Draw(cursorTexture, cursorPosition, null, Color.White, 0f, Vector2.Zero, scale, SpriteEffects.None, 0f);
 
             _spriteBatch.End();
 

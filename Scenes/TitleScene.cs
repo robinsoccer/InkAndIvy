@@ -135,6 +135,8 @@ namespace InkAndIvy.Scenes
                 spriteBatch.Draw(newButton, new Rectangle((int)newPos.X, (int)newPos.Y, newButton.Width * scale * 2, newButton.Height * scale * 2), newColor);
                 spriteBatch.Draw(loadButton, new Rectangle((int)loadPos.X, (int)loadPos.Y, loadButton.Width * scale * 2, loadButton.Height * scale * 2), loadColor);
             }
+
+            spriteBatch.End();
         }
     }
 }
