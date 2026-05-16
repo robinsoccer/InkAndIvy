@@ -63,7 +63,7 @@ namespace InkAndIvy.Graphics
             return textureStore;
         }
 
-        public void Draw(SpriteBatch spriteBatch, Texture2D tileset, Vector2 startingPos)
+        public void Draw(SpriteBatch spriteBatch, Texture2D tileset, Vector2 startingPos, float brightness)
         {
             foreach (var item in tilemap)
             {
@@ -75,7 +75,7 @@ namespace InkAndIvy.Graphics
 
                 Rectangle src = textureStore[item.Value];
 
-                spriteBatch.Draw(tileset, dest, src, Color.White);
+                spriteBatch.Draw(tileset, dest, src, Color.White * brightness);
             }
         }
     }

@@ -108,12 +108,12 @@ namespace InkAndIvy.Scenes
         {
             spriteBatch.Begin(samplerState: SamplerState.PointClamp, transformMatrix: camera.GetTransformation());
 
-            BG.Draw(spriteBatch, tileset, tilemapPos);
-            MG.Draw(spriteBatch, tileset, tilemapPos);
+            BG.Draw(spriteBatch, tileset, tilemapPos, 0.9f);
+            MG.Draw(spriteBatch, tileset, tilemapPos, 0.9f);
 
             player.Draw(spriteBatch);
 
-            FG.Draw(spriteBatch, tileset, tilemapPos);
+            FG.Draw(spriteBatch, tileset, tilemapPos, 0.9f);
 
             spriteBatch.End();
         }

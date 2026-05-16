@@ -120,14 +120,14 @@ namespace InkAndIvy.Scenes
         {
             spriteBatch.Begin(samplerState: SamplerState.PointClamp);
 
-            BG.Draw(spriteBatch, tileset, tilemapPos);
-            MG.Draw(spriteBatch, tileset, tilemapPos);
+            BG.Draw(spriteBatch, tileset, tilemapPos, 1.0f);
+            MG.Draw(spriteBatch, tileset, tilemapPos, 1.0f);
 
             furnitureManager.Draw(spriteBatch);
 
             player.Draw(spriteBatch);
 
-            FG.Draw(spriteBatch, tileset, tilemapPos);
+            FG.Draw(spriteBatch, tileset, tilemapPos, 1.0f);
 
             spriteBatch.End();
         }

@@ -20,6 +20,10 @@ namespace InkAndIvy.Scenes
         private Texture2D titleImage;
         private Texture2D loadButton;
         private Texture2D newButton;
+        private Texture2D madeByTitle;
+
+        private bool beenFiveSecsonds;
+        private float timer = 0f;
 
         private Color loadColor;
         private Color newColor;
@@ -47,6 +51,7 @@ namespace InkAndIvy.Scenes
             _game = game;
 
             inSpot = false;
+            beenFiveSecsonds = false;
         }
 
         public void Load()
@@ -57,17 +62,26 @@ namespace InkAndIvy.Scenes
             titleImage = Content.Load<Texture2D>("titles/maintitleimage");
             loadButton = Content.Load<Texture2D>("titles/LoadImageTS");
             newButton = Content.Load<Texture2D>("titles/NewImageTS");
+            madeByTitle = Content.Load<Texture2D>("titles/madeByoldAwesome");
 
             titlePos = new Vector2(graphics.PreferredBackBufferWidth / 2 - titleImage.Width / 2 * scale, graphics.PreferredBackBufferHeight);
             
         }
         public void Update(GameTime gameTime)
         {
+            timer += (float)gameTime.ElapsedGameTime.TotalSeconds;
+
+            if (timer >= 5f)
+            {
+                beenFiveSecsonds = true;
+                timer = 0f;
+            }
+            
             // Calculate the target Y position
             float targetY = graphics.PreferredBackBufferHeight / 15f;
 
             // If we haven't reached the target yet, keep moving up
-            if (titlePos.Y > targetY)
+            if (titlePos.Y > targetY && beenFiveSecsonds)
             {
                 titlePos.Y -= speed;
 
@@ -128,7 +142,15 @@ namespace InkAndIvy.Scenes
         {
             spriteBatch.Begin(samplerState: SamplerState.PointClamp);
 
-            spriteBatch.Draw(titleImage, new Rectangle((int)titlePos.X, (int)titlePos.Y, titleImage.Width * scale, titleImage.Height * scale), Color.White);
+            if (!beenFiveSecsonds)
+            {
+                spriteBatch.Draw(madeByTitle, new Rectangle(graphics.PreferredBackBufferWidth / 2 - (madeByTitle.Width * 8 / 2), graphics.PreferredBackBufferHeight / 2 - (madeByTitle.Height * 8 / 2), madeByTitle.Width * 8, madeByTitle.Height * 8), Color.White * 0.9f);
+            }
+
+            if (beenFiveSecsonds)
+            {
+                spriteBatch.Draw(titleImage, new Rectangle((int)titlePos.X, (int)titlePos.Y, titleImage.Width * scale, titleImage.Height * scale), Color.White);
+            }
 
             if (inSpot)
             {
