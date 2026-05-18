@@ -51,7 +51,7 @@ namespace InkAndIvy
 
             MouseState mouseState = new MouseState();
             cursorPosition = new Vector2(mouseState.X, mouseState.Y);
-            cursorTexture = Content.Load<Texture2D>("mousesprite");
+            cursorTexture = Content.Load<Texture2D>("mousespritev2");
         }
 
         protected override void Update(GameTime gameTime)

@@ -20,7 +20,7 @@ namespace InkAndIvy.Graphics
 
         public Vector2 ToGrid(Vector2 pos, Vector2 tilemapOffset)
         {
-            Vector2 gridPos = new Vector2((int)(pos.X / 16 / Scale) - tilemapOffset.X, (int)(pos.X / 16 /Scale) - tilemapOffset.Y);
+            Vector2 gridPos = new Vector2((int)(pos.X / 16 / Scale) - tilemapOffset.X, (int)(pos.X / 16 /Scale) + tilemapOffset.Y);
             return gridPos;
         }
     }

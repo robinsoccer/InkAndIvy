@@ -56,7 +56,7 @@ namespace InkAndIvy.Scenes
 
         public void Load()
         {
-            playerTexture = Content.Load<Texture2D>("player/heroSpriteSheetv1");
+            playerTexture = Content.Load<Texture2D>("player/heroSpriteSheetv2");
 
 
             player = new Player(5, playerTexture, 4, 8, 5, new Vector2(graphics.PreferredBackBufferWidth / 2, graphics.PreferredBackBufferHeight / 2), 0, 7, "../../../Content/Data/HouseTilemapv1_Collision.csv", tilemapPos, Content);

@@ -42,6 +42,8 @@ namespace InkAndIvy.Scenes
 
         private Game game;
 
+        private GridManager gridManager;
+
         public ForestScene(ContentManager Content, SceneManager sceneManager, GraphicsDeviceManager graphics, string starting, Game game)
         {
             this.Content = Content;
@@ -72,26 +74,26 @@ namespace InkAndIvy.Scenes
 
         public void Load()
         {
-            playerTexture = Content.Load<Texture2D>("player/heroSpriteSheetv1");
-            player = new Player(5, playerTexture, 4, 8, 5, playerPos, 0, 7, "../../../Content/Data/Forest/ForestTilemapv5_collision.csv", tilemapPos, Content);
+            playerTexture = Content.Load<Texture2D>("player/heroSpriteSheetv2");
+            player = new Player(5, playerTexture, 4, 8, 5, playerPos, 0, 7, "../../../Content/Data/Forest/ForestTilemapv6_collision.csv", tilemapPos, Content);
             
-            tileset = Content.Load<Texture2D>("tilesets/ForestTilesetv5");
+            tileset = Content.Load<Texture2D>("tilesets/ForestTilesetv6");
 
             camera = new Camera(game.GraphicsDevice);
 
             totalTextures = tileset.Width / 16;
 
-            BG = new Tilemap(tileset, "../../../Content/Data/Forest/ForestTilemapv5_BG.csv", totalTextures);
+            BG = new Tilemap(tileset, "../../../Content/Data/Forest/ForestTilemapv6_BG.csv", totalTextures);
             textureStore = BG.TileSourceRect();
-            tilemap = BG.LoadMap("../../../Content/Data/Forest/ForestTilemapv5_BG.csv");
+            tilemap = BG.LoadMap("../../../Content/Data/Forest/ForestTilemapv6_BG.csv");
 
-            MG = new Tilemap(tileset, "../../../Content/Data/Forest/ForestTilemapv5_MG.csv", totalTextures);
+            MG = new Tilemap(tileset, "../../../Content/Data/Forest/ForestTilemapv6_MG.csv", totalTextures);
             textureStore = MG.TileSourceRect();
-            tilemap = MG.LoadMap("../../../Content/Data/Forest/ForestTilemapv5_MG.csv");
+            tilemap = MG.LoadMap("../../../Content/Data/Forest/ForestTilemapv6_MG.csv");
 
-            FG = new Tilemap(tileset, "../../../Content/Data/Forest/ForestTilemapv5_FG.csv", totalTextures);
+            FG = new Tilemap(tileset, "../../../Content/Data/Forest/ForestTilemapv6_FG.csv", totalTextures);
             textureStore = FG.TileSourceRect();
-            tilemap = FG.LoadMap("../../../Content/Data/Forest/ForestTilemapv5_FG.csv");
+            tilemap = FG.LoadMap("../../../Content/Data/Forest/ForestTilemapv6_FG.csv");
         }
 
         public void Update(GameTime gameTime)
@@ -108,12 +110,12 @@ namespace InkAndIvy.Scenes
         {
             spriteBatch.Begin(samplerState: SamplerState.PointClamp, transformMatrix: camera.GetTransformation());
 
-            BG.Draw(spriteBatch, tileset, tilemapPos, 0.9f);
-            MG.Draw(spriteBatch, tileset, tilemapPos, 0.9f);
+            BG.Draw(spriteBatch, tileset, tilemapPos, 1f);
+            MG.Draw(spriteBatch, tileset, tilemapPos, 1f);
 
             player.Draw(spriteBatch);
 
-            FG.Draw(spriteBatch, tileset, tilemapPos, 0.9f);
+            FG.Draw(spriteBatch, tileset, tilemapPos, f);
 
             spriteBatch.End();
         }
