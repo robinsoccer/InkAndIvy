@@ -22,6 +22,8 @@ namespace InkAndIvy.Scenes
         private Texture2D newButton;
         private Texture2D madeByTitle;
 
+        private Texture2D itemSpriteSheet;
+
         private bool beenFiveSecsonds;
         private float timer = 0f;
 
@@ -40,13 +42,15 @@ namespace InkAndIvy.Scenes
 
         private Game1 _game;
 
-        public TitleScene(ContentManager contentManager, SceneManager sceneManager, GraphicsDeviceManager graphics, int speed, int scale, Game1 game)
+        public TitleScene(ContentManager contentManager, SceneManager sceneManager, GraphicsDeviceManager graphics, int speed, int scale, Game1 game, Texture2D itemSpriteSheet)
         {
             this.speed = speed;
             Content = contentManager;
             this.sceneManager = sceneManager;
             this.graphics = graphics;
             this.scale = scale;
+
+            this.itemSpriteSheet = itemSpriteSheet;
             
             _game = game;
 
@@ -115,7 +119,7 @@ namespace InkAndIvy.Scenes
                 MediaPlayer.Pause();
                 _game._playerData = new PlayerData() { Name = "New Player", Position = new Vector2(graphics.PreferredBackBufferWidth / 2, graphics.PreferredBackBufferHeight / 2) };
 
-                sceneManager.AddScene(new HouseScene(Content, sceneManager, graphics, _game, true));
+                sceneManager.AddScene(new HouseScene(Content, sceneManager, graphics, _game, true, itemSpriteSheet));
             }
 
             if (loadBounds.Contains(mouseState.Position))
@@ -134,7 +138,7 @@ namespace InkAndIvy.Scenes
 
                 _game._playerData.LoadGame(_game._savePath);
 
-                sceneManager.AddScene(new HouseScene(Content, sceneManager, graphics, _game, false));
+                sceneManager.AddScene(new HouseScene(Content, sceneManager, graphics, _game, false, itemSpriteSheet));
             }
 
         }

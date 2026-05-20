@@ -19,6 +19,8 @@ namespace InkAndIvy
         private Texture2D cursorTexture;
         private Vector2 cursorPosition;
 
+        private Texture2D itemTextureAtlas;
+
         public Game1()
         {
             _graphics = new GraphicsDeviceManager(this);
@@ -47,11 +49,14 @@ namespace InkAndIvy
         {
             _spriteBatch = new SpriteBatch(GraphicsDevice);
 
-            sceneManager.AddScene(new TitleScene(Content, sceneManager, _graphics, 4, 2, this));
+            itemTextureAtlas = Content.Load<Texture2D>("furniture/itemSpritesheetv1");
+
+            sceneManager.AddScene(new TitleScene(Content, sceneManager, _graphics, 4, 2, this, itemTextureAtlas));
 
             MouseState mouseState = new MouseState();
             cursorPosition = new Vector2(mouseState.X, mouseState.Y);
             cursorTexture = Content.Load<Texture2D>("mousespritev2");
+
         }
 
         protected override void Update(GameTime gameTime)

@@ -32,6 +32,7 @@ namespace InkAndIvy.Scenes
         private Texture2D tileset;
 
         private Texture2D windowTexture;
+        private Texture2D itemSpriteSheet;
 
         private Vector2 tilemapPos;
 
@@ -41,11 +42,13 @@ namespace InkAndIvy.Scenes
 
         private bool newGame;
 
-        public HouseScene(ContentManager contentManager, SceneManager sceneManager, GraphicsDeviceManager graphicsDeviceManager, Game1 game, bool newGame)
+        public HouseScene(ContentManager contentManager, SceneManager sceneManager, GraphicsDeviceManager graphicsDeviceManager, Game1 game, bool newGame, Texture2D itemSpriteSheet)
         {
             Content = contentManager;
             this.sceneManager = sceneManager;
             graphics = graphicsDeviceManager;
+
+            this.itemSpriteSheet = itemSpriteSheet;
 
             tilemapPos = new Vector2(graphics.PreferredBackBufferWidth / 2 - 7 * 16 * 5, graphics.PreferredBackBufferHeight / 2 - 7 * 16 * 5);
 
@@ -111,7 +114,7 @@ namespace InkAndIvy.Scenes
 
             if (playerPos.Y + 17 * 5 > tilemapPos.Y + (13 * 16 * 5))
             {
-                sceneManager.AddScene(new ForestScene(Content, sceneManager, graphics, "house", game));
+                sceneManager.AddScene(new ForestScene(Content, sceneManager, graphics, "house", game, itemSpriteSheet));
             }
 
             oldState = kState;

@@ -28,13 +28,20 @@ namespace InkAndIvy.Scenes
         private List<Rectangle> textureStore;
         private Texture2D tileset;
 
+        private Texture2D itemSpriteSheet;
+
         private Vector2 tilemapPos;
         private Vector2 playerPos;
+
+        private List<string> spawnNames;
+        private List<Rectangle> spawnSrcRects;
 
         private GridManager gridM;
 
         private int totalTextures;
         private int tilemapLength;
+
+        private SpawnManager spawnM;
 
         private Camera camera;
 
@@ -42,9 +49,7 @@ namespace InkAndIvy.Scenes
 
         private Game game;
 
-        private GridManager gridManager;
-
-        public ForestScene(ContentManager Content, SceneManager sceneManager, GraphicsDeviceManager graphics, string starting, Game game)
+        public ForestScene(ContentManager Content, SceneManager sceneManager, GraphicsDeviceManager graphics, string starting, Game game, Texture2D itemSpriteSheet)
         {
             this.Content = Content;
             this.sceneManager = sceneManager;
@@ -52,6 +57,10 @@ namespace InkAndIvy.Scenes
 
             tilemapLength = 40;
             scale = 5;
+
+            spawnNames = new List<string> { "Hazelnut", "Pear" };
+
+            this.itemSpriteSheet = itemSpriteSheet;
 
             this.game = game;
 
@@ -94,6 +103,9 @@ namespace InkAndIvy.Scenes
             FG = new Tilemap(tileset, "../../../Content/Data/Forest/ForestTilemapv6_FG.csv", totalTextures);
             textureStore = FG.TileSourceRect();
             tilemap = FG.LoadMap("../../../Content/Data/Forest/ForestTilemapv6_FG.csv");
+
+            spawnM = new SpawnManager(itemSpriteSheet, tilemapPos, scale, "../../../Content/Data/Forest/ForestTilemapv6_spawn.csv", spawnNames);
+            spawnM.SpawnItems();
         }
 
         public void Update(GameTime gameTime)
@@ -113,9 +125,11 @@ namespace InkAndIvy.Scenes
             BG.Draw(spriteBatch, tileset, tilemapPos, 1f);
             MG.Draw(spriteBatch, tileset, tilemapPos, 1f);
 
+            spawnM.Draw(spriteBatch);
+
             player.Draw(spriteBatch);
 
-            FG.Draw(spriteBatch, tileset, tilemapPos, f);
+            FG.Draw(spriteBatch, tileset, tilemapPos, 1f);
 
             spriteBatch.End();
         }

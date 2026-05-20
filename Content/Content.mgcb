@@ -25,6 +25,18 @@
 /processorParam:Quality=Best
 /build:audio/SpringIsAwake.wav
 
+#begin furniture/itemSpritesheetv1.png
+/importer:TextureImporter
+/processor:TextureProcessor
+/processorParam:ColorKeyColor=255,0,255,255
+/processorParam:ColorKeyEnabled=True
+/processorParam:GenerateMipmaps=False
+/processorParam:PremultiplyAlpha=True
+/processorParam:ResizeToPowerOfTwo=False
+/processorParam:MakeSquare=False
+/processorParam:TextureFormat=Color
+/build:furniture/itemSpritesheetv1.png
+
 #begin furniture/windowImg.png
 /importer:TextureImporter
 /processor:TextureProcessor
