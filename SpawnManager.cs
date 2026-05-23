@@ -14,37 +14,28 @@ namespace InkAndIvy
     {
         private Texture2D textureAtlas;
         private int scale;
-
         private List<Rectangle> srcRect;
         private List<Rectangle> dstRect;
-
         private int spawnIndex;
-
         private Vector2 tilemapOffset;
         private GridManager gridManager;
-
         private List<string> spawnNames;
         private List<Rectangle> spawnableTiles;
         private List<Rectangle> prevSpawnRects;
-
-
         private string spawnFilepath;
 
         public SpawnManager(Texture2D textureAtlas, Vector2 tilemapOffset, int scale, string spawnFilepath, List<string> spawnNames)
         {
             this.textureAtlas = textureAtlas;
-
             spawnIndex = 0;
-
             srcRect = new List<Rectangle>();
             dstRect = new List<Rectangle>();
             prevSpawnRects = new List<Rectangle>();
-
             this.tilemapOffset = tilemapOffset;
             this.scale = scale;
             gridManager = new GridManager(scale);
             this.spawnFilepath = spawnFilepath;
-
+            this.spawnNames = spawnNames; // FIX 1: was missing
             spawnableTiles = new List<Rectangle>();
         }
 
@@ -54,11 +45,9 @@ namespace InkAndIvy
             StreamReader reader = new StreamReader(spawnFilepath);
             int y = 0;
             string line;
-
             while ((line = reader.ReadLine()) != null)
             {
                 string[] items = line.Split(',');
-
                 for (int x = 0; x < items.Length; x++)
                 {
                     if (int.TryParse(items[x], out int value))
@@ -80,22 +69,21 @@ namespace InkAndIvy
             spawnableTiles = GetSpawnTiles();
             int max = spawnNames.Count;
             Random rnd = new Random();
-            
+
             foreach (Rectangle spawnTile in spawnableTiles)
             {
                 if (rnd.Next(101) > 90)
                 {
-                    int index = rnd.Next(max) - 1;
+                    int index = rnd.Next(max); // FIX 2: removed -1
                     Rectangle thisSrcRect = new Rectangle(
                         16 * index,
                         0,
                         16,
                         16);
                     srcRect.Add(thisSrcRect);
-                    dstRect.Add(spawnableTiles[index]);
+                    dstRect.Add(spawnTile); // FIX 3: was spawnableTiles[index]
                 }
             }
-
         }
 
         public void Draw(SpriteBatch spriteBatch)
